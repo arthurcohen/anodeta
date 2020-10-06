@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c1687119596ec24682da62c8ac97fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 1, g: 0, b: 0, a: 1}
+  color: {r: 0.9811321, g: 0.54155797, b: 0.54155797, a: 1}
   functionName: resetGame
   weight: 1
 --- !u!212 &2049118161136135135

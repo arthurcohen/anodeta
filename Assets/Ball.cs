@@ -22,7 +22,7 @@ public class Ball : MonoBehaviour
         rb.velocity = new Vector2(3, 3);
         powerController = GameObject.FindObjectOfType<GenericPowerController>();
         gameController = GameObject.FindObjectOfType<GenericGameController>();
-        detectMapBoundaries();
+        mapBoundaries = gameController.detectMapBoundaries();
     }
 
     // Update is called once per frame
@@ -41,14 +41,10 @@ public class Ball : MonoBehaviour
     private void detectWallCollisions() {
         float ballRadius = transform.lossyScale.y / 2f;
 
-        if (rb.position.x >= mapBoundaries.x - ballRadius) genericCollisionResolver(Vector2.left);
-        if (rb.position.x <= -mapBoundaries.x + ballRadius) genericCollisionResolver(Vector2.right);
-        if (rb.position.y >= mapBoundaries.y - ballRadius) genericCollisionResolver(Vector2.up);
-        if (rb.position.y <= -mapBoundaries.y - ballRadius) kill();
-    }
-
-    private void detectMapBoundaries() {
-        mapBoundaries = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+        if (rb.position.x >= mapBoundaries.x - ballRadius && rb.velocity.x > 0) genericCollisionResolver(Vector2.left);
+        if (rb.position.x <= -mapBoundaries.x + ballRadius && rb.velocity.x < 0) genericCollisionResolver(Vector2.right);
+        if (rb.position.y >= mapBoundaries.y - ballRadius && rb.velocity.y > 0) genericCollisionResolver(Vector2.up);
+        if (rb.position.y <= -mapBoundaries.y - ballRadius && rb.velocity.y < 0) kill();
     }
 
     private void modulateSpeed() {

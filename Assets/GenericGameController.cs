@@ -26,6 +26,7 @@ public class GenericGameController : MonoBehaviour {
         checkEndGame();
     }
 
+
     private void checkEndGame() {
         bool shouldEnd = true;
 
@@ -75,7 +76,7 @@ public class GenericGameController : MonoBehaviour {
     public void createGravity(Vector2 position) {
         foreach(Ball ball in GameObject.FindObjectsOfType<Ball>()) {
             ball.gravityPosition = position;
-            Debug.Log(position);
+            // Debug.Log(position);
         }
     }
 
@@ -139,7 +140,7 @@ public class GenericGameController : MonoBehaviour {
         createNewBall();
     }
 
-    public void loadScene(int index) {
-        SceneManager.LoadScene(index, LoadSceneMode.Single);
+    public Vector2 detectMapBoundaries() {
+        return Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
     }
 }

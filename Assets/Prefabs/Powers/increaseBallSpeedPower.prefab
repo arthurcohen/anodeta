@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c1687119596ec24682da62c8ac97fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0.85882354, g: 0.24705881, b: 0.36429033, a: 1}
+  color: {r: 1, g: 0.23529412, b: 0.21960784, a: 1}
   functionName: increaseBallSpeed
   weight: 1
 --- !u!212 &5961341900254596014
