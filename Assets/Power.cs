@@ -4,13 +4,11 @@ using UnityEngine;
 
 [System.Serializable]
 public class Power : MonoBehaviour {
-    public Color color;
     public string functionName;
     public int weight = 1;
     private float sidewaysMove = 0f;
 
     void Start() {
-        GetComponent<SpriteRenderer>().color = color;
         Destroy(gameObject, 15);
     }
 

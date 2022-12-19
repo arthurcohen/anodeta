@@ -30,21 +30,11 @@ public class Ball : MonoBehaviour
         modulateSpeed();
         rb.velocity = isMoving ? rb.velocity : Vector2.zero;
         lastVelocity = rb.velocity;
-        detectWallCollisions();
-
+        CollisionHelper.detectWallCollisions(gameObject, downCallback: delegate() { kill(); });
     }
 
     void Update() {
         if (!isMoving) followPaddle();
-    }
-
-    private void detectWallCollisions() {
-        float ballRadius = transform.lossyScale.y / 2f;
-
-        if (rb.position.x >= mapBoundaries.x - ballRadius && rb.velocity.x > 0) genericCollisionResolver(Vector2.left);
-        if (rb.position.x <= -mapBoundaries.x + ballRadius && rb.velocity.x < 0) genericCollisionResolver(Vector2.right);
-        if (rb.position.y >= mapBoundaries.y - ballRadius && rb.velocity.y > 0) genericCollisionResolver(Vector2.up);
-        if (rb.position.y <= -mapBoundaries.y - ballRadius && rb.velocity.y < 0) kill();
     }
 
     private void modulateSpeed() {
@@ -78,28 +68,10 @@ public class Ball : MonoBehaviour
         Debug.DrawLine(collision.transform.position, transform.position, Color.grey, 3f);
     } 
 
-    private void genericCollisionHandler(Collision2D collision) {
-        Vector2 lastNormal = Vector2.zero;
-
-        for (int i = 0; i < collision.contactCount; i++) {
-            ContactPoint2D contact = collision.GetContact(i);
-            Debug.DrawLine(transform.position, rb.position + contact.normal, Color.yellow, 3f);
-            Debug.DrawLine(transform.position, rb.position + rb.velocity.normalized, Color.red, 3f);
-            Debug.DrawLine(transform.position, rb.position + lastVelocity.normalized, Color.blue, 3f);
-
-            lastNormal = contact.normal;
-        }
-
-        // rb.velocity = Vector2.Reflect(lastVelocity, lastNormal);
-        genericCollisionResolver(lastNormal);
-    }
-
-    private void genericCollisionResolver(Vector2 normal) {
-        rb.velocity = Vector2.Reflect(lastVelocity, normal);
-    }
+    
 
     void OnCollisionEnter2D(Collision2D collision) {
-        genericCollisionHandler(collision);
+        CollisionHelper.genericCollisionHandler(gameObject, collision, lastVelocity);
         playerCollisionHandler(collision);
         genericBrickCollisionHandler(collision);
     }

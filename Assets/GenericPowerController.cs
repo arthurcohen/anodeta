@@ -8,7 +8,7 @@ public class GenericPowerController : MonoBehaviour
     [SerializeField]
     public GameObject[] powers;
     public float chanceOfGeneratePower = 0.05f;
-    public float secondsToImprovePowerRate = 1f;
+    public float secondsToImprovePowerRate = 2f;
     public float powerImprovementAmount = 0.01f;
     private List<int> powersIndexes = new List<int>();
     private float powerRateTimeTracker = 0f;
@@ -32,7 +32,7 @@ public class GenericPowerController : MonoBehaviour
         if (powerRateTimeTracker >= secondsToImprovePowerRate) {
             powerRateTimeTracker = 0f;
             powerBooster += powerImprovementAmount;
-            // Debug.Log("Total power chance = " + (chanceOfGeneratePower + powerBooster));
+            Debug.Log("Total power chance = " + (chanceOfGeneratePower + powerBooster));
         }
     }
 

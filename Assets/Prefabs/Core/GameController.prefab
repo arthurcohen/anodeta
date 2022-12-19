@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.0136938, y: -1.1201888, z: -3.0119052}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -44,4 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paddleControllerHeight: -2.5
+  paddleHeight: -4
   ballPrefab: {fileID: 3433042984638191518, guid: 1191e34e1836d5e43b85ccbfc6b72c85, type: 3}
+  paddlePrefab: {fileID: 7492739219812171946, guid: 8070ad553984a7749a024e7dfa04adb8, type: 3}

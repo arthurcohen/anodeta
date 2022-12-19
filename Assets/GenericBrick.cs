@@ -5,7 +5,7 @@ using UnityEngine;
 public class GenericBrick : MonoBehaviour
 {
     public int initialHealthPoints = 1;
-    public int healthPoints;
+    private int healthPoints;
     private Vector2 initialPosition;
     private bool isDead = false;
 
@@ -20,10 +20,14 @@ public class GenericBrick : MonoBehaviour
 
     void checkDeath() {
         if (!isDead && healthPoints <= 0) {
-            GetComponent<Collider2D>().enabled = false;
-            GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0f);
-            isDead = true;
+            kill();
         }
+    }
+
+    public void kill() {
+        GetComponent<Collider2D>().enabled = false;
+        GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0f);
+        isDead = true;
     }
 
     public void dealDamage(int damageAmount) {
@@ -33,7 +37,20 @@ public class GenericBrick : MonoBehaviour
     public void resetBrick() {
         healthPoints = initialHealthPoints;
         transform.position = initialPosition;
+        isDead = false;
+
+        try {
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            rb.velocity = Vector2.zero;
+            rb.angularVelocity = 0;
+            rb.rotation = 0;
+        } catch (System.Exception) {}
+
         GetComponent<Collider2D>().enabled = true;
         GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+    }
+
+    public int getHealthPoints() {
+        return healthPoints;
     }
 }

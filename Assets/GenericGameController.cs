@@ -7,9 +7,12 @@ using UnityEngine.SceneManagement;
 public class GenericGameController : MonoBehaviour {
     // Start is called before the first frame update
     public float paddleControllerHeight = -2.7f;
+    public float paddleHeight = -5f;
     public GameObject ballPrefab;
+    public GameObject paddlePrefab;
     void Start()
     {
+        createPaddle();
         createNewBall();
         Debug.DrawLine(new Vector2(-2.5f, paddleControllerHeight), new Vector2(2.5f, paddleControllerHeight), Color.red, 1000);
     }
@@ -26,12 +29,16 @@ public class GenericGameController : MonoBehaviour {
         checkEndGame();
     }
 
+    private void createPaddle() {
+        GameObject ball = Instantiate(paddlePrefab, Vector2.zero + (Vector2.up * paddleHeight), Quaternion.identity);
+    }
+
 
     private void checkEndGame() {
         bool shouldEnd = true;
 
         foreach(GenericBrick brick in GameObject.FindObjectsOfType<GenericBrick>()) {
-            if (brick.healthPoints > 0) shouldEnd = false;
+            if (brick.getHealthPoints() > 0) shouldEnd = false;
         }
         
         if (!shouldEnd) return;

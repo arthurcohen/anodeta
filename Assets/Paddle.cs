@@ -33,11 +33,12 @@ public class Paddle : MonoBehaviour
         Debug.DrawLine(Vector2.zero, transform.position, Color.magenta);
         Debug.DrawLine(Vector2.zero, lastExpectedPosition, Color.blue);
 
-        transform.position = (newPosition);
+        // transform.position = (newPosition);
+        rb.MovePosition(newPosition);
     }
 
     void OnCollisionEnter2D(Collision2D hit) {
-        rb.velocity = Vector2.zero;
+        // rb.velocity = Vector2.zero;
     }
 
     public void setSpeed(float newSpeed) {

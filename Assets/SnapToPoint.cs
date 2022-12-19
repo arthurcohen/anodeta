@@ -15,7 +15,6 @@ public class SnapToPoint : MonoBehaviour
         rb = gameObject.AddComponent<Rigidbody2D>();
 
         target = transform.position;
-        
     }
 
     // Update is called once per frame
@@ -24,7 +23,6 @@ public class SnapToPoint : MonoBehaviour
         if (targetObject != null) {
             target = targetObject.position;
         }
-
 
         Vector2 snappingDirection = target - transform.position;
 
